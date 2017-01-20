@@ -1,10 +1,10 @@
 # teamcity job executor
 
-simple command line utils which run job in teamcity and wait to end
+simple command line utility which run job in teamcity and wait to finish
 
-is is build success then exit with exit code 0
+success status of build = exit code 0
 
-other status are exit code 1
+other status = exit code 1
 
 non-interactive run example:
 ```
