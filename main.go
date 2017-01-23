@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-const VERSION = "0.1.0"
+const VERSION = "0.2.0"
 
 var (
 	hostname      = kingpin.Flag("hostname", "teamcity hostname").Short('H').Required().String()
@@ -39,6 +39,8 @@ func main() {
 	if err != nil {
 		log.Fatal("QueueBuild error: %s\n", err)
 	}
+
+	log.Println("Build queued (", b.WebURL, ")")
 
 	for {
 		b, err = client.GetBuild(strconv.FormatInt(b.ID, 10))
