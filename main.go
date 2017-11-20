@@ -1,29 +1,30 @@
 package main
 
 import (
-	"github.com/bgentry/speakeasy"
-	"github.com/mkobaly/teamcity"
-	"gopkg.in/alecthomas/kingpin.v2"
 	"log"
 	"os"
 	"strconv"
-	"time"
 	"strings"
+	"time"
+
+	"github.com/bgentry/speakeasy"
+	"github.com/mkobaly/teamcity"
+	"gopkg.in/alecthomas/kingpin.v2"
 )
 
-const VERSION = "0.3.0"
+var version = "0.3.0"
 
 var (
 	hostname      = kingpin.Flag("hostname", "teamcity hostname").Short('H').Required().String()
 	username      = kingpin.Flag("username", "teamcity username").Short('u').Required().String()
 	password      = kingpin.Flag("password", "teamcity password").Short('p').String()
-	job_params    = kingpin.Flag("job_param", "teamcity job parameters in key=value format").Short('j').Strings()
-	configId      = kingpin.Arg("configId", "id of build configuration which you can run").String()
+	jobParams     = kingpin.Flag("job_param", "teamcity job parameters in key=value format").Short('j').Strings()
+	configID      = kingpin.Arg("configId", "id of build configuration which you can run").String()
 	sleepDuration = kingpin.Flag("sleep", "sleep duration of pooling teamcity").Default("5s").Duration()
 )
 
 func main() {
-	kingpin.Version(VERSION)
+	kingpin.Version(version)
 	kingpin.Parse()
 
 	if len(*password) == 0 {
@@ -38,14 +39,14 @@ func main() {
 	client := teamcity.New(*hostname, *username, *password)
 
 	properties := make(map[string]string)
-	for _, pair := range *job_params {
-    key_value := strings.Split(pair, "=")
-    properties[key_value[0]] = key_value[1]
+	for _, pair := range *jobParams {
+		keyValue := strings.Split(pair, "=")
+		properties[keyValue[0]] = keyValue[1]
 	}
 
-	b, err := client.QueueBuild(*configId, "master", properties)
+	b, err := client.QueueBuild(*configID, "master", properties)
 	if err != nil {
-		log.Fatal("QueueBuild error: %s\n", err)
+		log.Fatalf("QueueBuild error: %s\n", err)
 	}
 
 	log.Println("Build queued (", b.WebURL, ")")
@@ -53,7 +54,7 @@ func main() {
 	for {
 		b, err = client.GetBuild(strconv.FormatInt(b.ID, 10))
 		if err != nil {
-			log.Fatal("GetBuild error: %s\n", err)
+			log.Fatalf("GetBuild error: %s\n", err)
 		}
 
 		log.Println(b)
