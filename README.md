@@ -8,7 +8,7 @@ other status = exit code 1
 
 non-interactive run example:
 ```
-teamcity-job-executor -H teamcity.server -u my_username -p my_password backends_Modules_App_Test 
+teamcity-job-executor -H teamcity.server -u my_username -p my_password backends_Modules_App_Test
 ```
 
 help:
@@ -20,6 +20,7 @@ Flags:
   -H, --hostname=HOSTNAME  teamcity hostname
   -u, --username=USERNAME  teamcity username
   -p, --password=PASSWORD  teamcity password
+   -j, --job_param=JOB_PARAM ...  teamcity job parameters in key=value format
       --sleep=5s           sleep duration of pooling teamcity
       --version            Show application version.
 
