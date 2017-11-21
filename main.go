@@ -41,6 +41,11 @@ func main() {
 	properties := make(map[string]string)
 	for _, pair := range *jobParams {
 		keyValue := strings.Split(pair, "=")
+
+		if len(keyValue) != 2 {
+			log.Fatalf("Cannot parse job parameter: %s", pair)
+		}
+
 		properties[keyValue[0]] = keyValue[1]
 	}
 
