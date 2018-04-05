@@ -1,6 +1,7 @@
 # teamcity job executor
 
-simple command line utility which run job in teamcity and wait to finish
+simple command line utility which runs job in teamcity and waits (without --nowait flag)
+for job to finish
 
 success status of build = exit code 0
 
@@ -22,6 +23,7 @@ Flags:
   -p, --password=PASSWORD  teamcity password
    -j, --job_param=JOB_PARAM ...  teamcity job parameters in key=value format
       --sleep=5s           sleep duration of pooling teamcity
+      --nowait             Does not wait for queued job to finish
       --version            Show application version.
 
 Args:
