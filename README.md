@@ -1,5 +1,7 @@
 # teamcity job executor
 
+[![Release](https://img.shields.io/github/release/avast/teamcity-job-executor.svg?style=flat-square)](https://github.com/avast/teamcity-job-executor/releases/latest)
+
 simple command line utility which runs job in teamcity and waits (without --nowait flag)
 for job to finish
 
