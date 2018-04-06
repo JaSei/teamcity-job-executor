@@ -12,7 +12,7 @@ import (
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
-var version = "0.4.0"
+var version = "dev"
 
 var (
 	hostname      = kingpin.Flag("hostname", "teamcity hostname").Short('H').Required().String()
