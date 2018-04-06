@@ -53,7 +53,6 @@ func main() {
 	b, err := client.QueueBuild(*configID, "master", properties)
 	if err != nil {
 		log.Fatalf("QueueBuild error: %s\n", err)
-		os.Exit(1)
 	}
 
 	log.Println("Build queued (", b.WebURL, ")")
