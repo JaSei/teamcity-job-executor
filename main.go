@@ -12,15 +12,16 @@ import (
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
-var version = "0.3.0"
+var version = "0.4.0"
 
 var (
 	hostname      = kingpin.Flag("hostname", "teamcity hostname").Short('H').Required().String()
 	username      = kingpin.Flag("username", "teamcity username").Short('u').Required().String()
 	password      = kingpin.Flag("password", "teamcity password").Short('p').String()
 	jobParams     = kingpin.Flag("job_param", "teamcity job parameters in key=value format").Short('j').Strings()
-	configID      = kingpin.Arg("configId", "id of build configuration which you can run").String()
 	sleepDuration = kingpin.Flag("sleep", "sleep duration of pooling teamcity").Default("5s").Duration()
+	nowait        = kingpin.Flag("nowait", "Does not wait for queued job to finish").Default("false").Bool()
+	configID      = kingpin.Arg("configId", "id of build configuration which you can run").String()
 )
 
 func main() {
@@ -55,6 +56,10 @@ func main() {
 	}
 
 	log.Println("Build queued (", b.WebURL, ")")
+
+	if *nowait {
+		os.Exit(0)
+	}
 
 	for {
 		b, err = client.GetBuild(strconv.FormatInt(b.ID, 10))
