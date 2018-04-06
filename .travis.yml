@@ -1,15 +1,14 @@
 language: go
-
 go:
-  - 1.9
-
+- 1.9
 install:
-  - make setup
-
+- make setup
 script:
-  - make ci
-
+- make ci
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
-  - rm coverage.txt
-  - test -n "$TRAVIS_TAG" && curl -sL http://git.io/goreleaser | bash
+- bash <(curl -s https://codecov.io/bash)
+- rm coverage.txt
+- test -n "$TRAVIS_TAG" && curl -sL http://git.io/goreleaser | bash
+env:
+  global:
+    secure: rlZAOvLVK19xJBkFB2wAkGMm8lCl7sd6uT3CpOkSbkPeRL1kTNAv9xb/LlRZo3iVnDOihMSmfZNNmKE5Zi8DgAF36opqBC8vqerQXyw1cDc06PJHooWT80strSm209YXb/ICD7EvdTDz1JtcoPgAKSKGpePlC9bj31EBeBDcqsj51rkals7tBH45DDOtSDwcjj4J/lLNVGr2hNuSNMQeLlqw+pgKQBERK834fAX87xlJUZZWY15i9ayJtaYVggCx/8YvPsdZXad8yKNpHehbgMKsvIuizGCIAxM4yRuaCiuL9aRzGrpaHGalDjsylAyFrSn7qHb2fXT43flSUlPbkxXfwvrucxecUGkVi4hlFe6koW+0keLa8u0/WP8vVX0DP6Dl4GMdLnKdp7sgVpzlQcNsEOfYYgXYLiPfirMMd5codRcIUt+LpeDMGwmFlXVFtWAQAd6mb7Tl92mmUmIcJAoUzD+LjeSwvuaUuOOHVW/X9M+DuV2B6JHea/0bmlPUKSYcsutEbXcck6YG7cH5K4eWlFZrFkabM0mwwYVyEJa64saZzaOL82FU1lEAySlN1PwSuIKTbDSQ9W9SFSnVHkadj6G+42WJDXDETWueoA72+DCwrd/ezgS8dlPP0+lh3XHwQXkd+oLPOk1eRPEBKecH+Ei5ZLWJKnnylZJLsSI=
