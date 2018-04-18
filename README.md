@@ -25,6 +25,7 @@ Flags:
   -H, --hostname=HOSTNAME  teamcity hostname
   -u, --username=USERNAME  teamcity username
   -p, --password=PASSWORD  teamcity password
+  -b, --branch=BRANCH      Branch for VSC root in teamcity job
    -j, --job_param=JOB_PARAM ...  teamcity job parameters in key=value format
       --sleep=5s           sleep duration of pooling teamcity
       --nowait             Does not wait for queued job to finish
