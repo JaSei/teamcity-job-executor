@@ -18,6 +18,7 @@ var (
 	hostname      = kingpin.Flag("hostname", "teamcity hostname").Short('H').Required().String()
 	username      = kingpin.Flag("username", "teamcity username").Short('u').Required().String()
 	password      = kingpin.Flag("password", "teamcity password").Short('p').String()
+	branch        = kingpin.Flag("branch", "Branch for VSC root in teamcity job").Short('b').String()
 	jobParams     = kingpin.Flag("job_param", "teamcity job parameters in key=value format").Short('j').Strings()
 	sleepDuration = kingpin.Flag("sleep", "sleep duration of pooling teamcity").Default("5s").Duration()
 	nowait        = kingpin.Flag("nowait", "Does not wait for queued job to finish").Default("false").Bool()
@@ -50,7 +51,7 @@ func main() {
 		properties[keyValue[0]] = keyValue[1]
 	}
 
-	b, err := client.QueueBuild(*configID, "master", properties)
+	b, err := client.QueueBuild(*configID, *branch, properties)
 	if err != nil {
 		log.Fatalf("QueueBuild error: %s\n", err)
 	}
