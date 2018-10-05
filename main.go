@@ -76,8 +76,8 @@ func main() {
 		}
 	}
 
-	log.Println(b.StatusText)
-	if b.StatusText == "Success" {
+	log.Printf("Status text:\n%s\n", b.StatusText)
+	if b.Status == "SUCCESS" {
 		os.Exit(0)
 	}
 
